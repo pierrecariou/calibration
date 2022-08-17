@@ -1,0 +1,24 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../include/Window.hpp
+opencv2/opencv.hpp
+-
+
+/home/pcariou/code/jobs/calibration/src/Window.cpp
+Window.hpp
+-
+
+/home/pcariou/code/jobs/calibration/src/main.cpp
+iostream
+-
+opencv2/opencv.hpp
+-
+Window.hpp
+-
+
