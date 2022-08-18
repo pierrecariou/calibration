@@ -6,12 +6,28 @@
 
 #IncludeRegexTransform: 
 
+../include/Camera.hpp
+opencv2/opencv.hpp
+-
+vector
+-
+
 ../include/Window.hpp
 opencv2/opencv.hpp
 -
 
+../include/constants.hpp
+
+/home/pcariou/code/jobs/calibration/src/Camera.cpp
+Camera.hpp
+-
+constants.hpp
+-
+
 /home/pcariou/code/jobs/calibration/src/Window.cpp
 Window.hpp
+-
+Camera.hpp
 -
 
 /home/pcariou/code/jobs/calibration/src/main.cpp

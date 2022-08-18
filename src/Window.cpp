@@ -7,16 +7,17 @@
  *************************************************************/
 
 #include <Window.hpp>
+#include <Camera.hpp>
 
-bool comparePoints(const cv::Point &p1, const cv::Point &p2) {
+bool yComp(const cv::Point2f &p1, const cv::Point2f &p2) {
 	    return p1.y < p2.y;
 }
 
-bool comparePoints1(const cv::Point &p1, const cv::Point &p2) {
+bool xComp(const cv::Point2f &p1, const cv::Point2f &p2) {
 	    return p1.x < p2.x;
 }
 
-bool comparePoints2(const cv::Point &p1, const cv::Point &p2) {
+bool xCompInv(const cv::Point2f &p1, const cv::Point2f &p2) {
 	    return p1.x > p2.y;
 }
 
@@ -35,9 +36,8 @@ void	Window::initialize()
 {
 	cv::namedWindow(name, 1);
 	cv::setMouseCallback(name, getUserInput, this);
-	cv::putText(image, "Please click on the 4 rectangle corners", cv::Point(10, image.rows - 10), 5    , 1, CV_RGB(255, 255, 255), 2);
+	cv::putText(image, "Please click on the 4 rectangle corners", cv::Point2f(10, image.rows - 10), 5    , 1, CV_RGB(255, 255, 255), 2);
 
-	//drawLine(image);
     cv::imshow(name, image);
     cv::waitKey(0);
 }
@@ -45,23 +45,26 @@ void	Window::initialize()
 void	Window::drawRectangle()
 {
 		// sort coordinates clockwise
-		std::sort(coordinates.begin(), coordinates.end(), comparePoints);
-		std::sort(coordinates.begin(), coordinates.end() - 2, comparePoints1);
-		std::sort(coordinates.begin() + 2, coordinates.end(), comparePoints2);
+		std::sort(coordinates.begin(), coordinates.end(), yComp);
+		std::sort(coordinates.begin(), coordinates.end() - 2, xComp);
+		std::sort(coordinates.begin() + 2, coordinates.end(), xCompInv);
 		
-		std::vector<std::vector<cv::Point>> corners(1, coordinates);
+		std::vector<std::vector<cv::Point>> corners(1); // new data type for coordinates points (parameter of drawContours func)
+		for (cv::Point2f p : coordinates)
+			corners[0].push_back(cv::Point(p.x, p.y));
 		image = rawImage;
 		cv::drawContours(image, corners, -1, cv::Scalar(0, 255, 0), 2, cv::LINE_8);	
-		//cv::putText(image, "Please click on the 4 dededee", cv::Point(10, image.rows - 10), 5, 1, CV_RGB(255, 255, 255), 2);
     	cv::imshow(name, rawImage);
+		startComputation();
 }
 
+// write circles on user clicks and get pixels values
 void	Window::getPoint(int event, int x, int y)
 {
 	if (coordinates.size() >= 4)
 		return ;
-	coordinates.push_back(cv::Point(x, y));
-	cv::circle(image, cv::Point(x, y), 2, cv::Scalar(0, 255, 0), 2, cv::FILLED);
+	coordinates.push_back(cv::Point2f(x, y));
+	cv::circle(image, cv::Point2f(x, y), 2, cv::Scalar(0, 255, 0), 2, cv::FILLED);
     cv::imshow(name, image);
 	if (coordinates.size() == 4)
 		drawRectangle();
@@ -70,8 +73,16 @@ void	Window::getPoint(int event, int x, int y)
 void	Window::getUserInput(int event, int x, int y, int flags, void* userdata)
 {
 	 if (event == cv::EVENT_LBUTTONDOWN) {
-     //   std::cout << "Left button of the mouse is clicked - position (" << x << ", " << y << ")" << std::endl;
 		Window* win = reinterpret_cast<Window*>(userdata);
     	win->getPoint(event, x, y);	
      }
+}
+
+void	Window::startComputation()
+{
+	Camera cam(coordinates);
+
+	cam.calibrate();
+	cam.calculatePosition();
+	std::cout << cam.getPosition() << std::endl;
 }

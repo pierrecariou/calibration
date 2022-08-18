@@ -16,6 +16,7 @@ include_directories(${OpenCV_INCLUDE_DIRS})
 add_executable(calibration
   ${CMAKE_SOURCE_DIR}/src/main.cpp
   ${CMAKE_SOURCE_DIR}/src/Window.cpp
+  ${CMAKE_SOURCE_DIR}/src/Camera.cpp
 )
 
 target_include_directories(calibration PUBLIC

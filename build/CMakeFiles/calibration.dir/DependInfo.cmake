@@ -4,6 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
+  "/home/pcariou/code/jobs/calibration/src/Camera.cpp" "/home/pcariou/code/jobs/calibration/build/CMakeFiles/calibration.dir/src/Camera.cpp.o"
   "/home/pcariou/code/jobs/calibration/src/Window.cpp" "/home/pcariou/code/jobs/calibration/build/CMakeFiles/calibration.dir/src/Window.cpp.o"
   "/home/pcariou/code/jobs/calibration/src/main.cpp" "/home/pcariou/code/jobs/calibration/build/CMakeFiles/calibration.dir/src/main.cpp.o"
   )

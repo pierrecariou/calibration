@@ -1,6 +1,7 @@
 file(REMOVE_RECURSE
   "CMakeFiles/calibration.dir/src/main.cpp.o"
   "CMakeFiles/calibration.dir/src/Window.cpp.o"
+  "CMakeFiles/calibration.dir/src/Camera.cpp.o"
   "calibration.pdb"
   "calibration"
 )

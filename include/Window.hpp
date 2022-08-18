@@ -18,15 +18,15 @@ class Window {
 	private:
 		void	initialize();
 		void	drawRectangle();
+		void	startComputation();
 
 		void getPoint(int event, int x, int y);
 		static void getUserInput(int event, int x, int y, int flags, void* userdata);
 
-//		void CallBackFunc(int event, int x, int y, int flags, void* userdata);
 		cv::Mat image;
 		cv::Mat rawImage;
 		std::string name;
-		std::vector<cv::Point> coordinates;
+		std::vector<cv::Point2f> coordinates; // for stocking 4 rectangle corners
 };
 
 #endif
