@@ -1,3 +1,0 @@
-/home/pcariou/code/jobs/calibration/build/CMakeFiles/rebuild_cache.dir
-/home/pcariou/code/jobs/calibration/build/CMakeFiles/edit_cache.dir
-/home/pcariou/code/jobs/calibration/build/CMakeFiles/calibration.dir

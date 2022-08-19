@@ -19,6 +19,7 @@ class Camera {
 
 		void	calibrate();
 		void	calculatePosition();
+		void	test(cv::Mat &image);
 
 		// Accessor
 		const cv::Mat &getPosition() const;

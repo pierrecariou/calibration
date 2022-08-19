@@ -10,6 +10,7 @@
 # define WINDOW_HPP
 
 #include <opencv2/opencv.hpp>
+#include <Camera.hpp>
 
 class Window {
 	public:
@@ -19,8 +20,9 @@ class Window {
 		void	initialize();
 		void	drawRectangle();
 		void	startComputation();
+		void	showCameraPosition(const Camera &cam) const;
 
-		void getPoint(int event, int x, int y);
+		void getPoint(int x, int y);
 		static void getUserInput(int event, int x, int y, int flags, void* userdata);
 
 		cv::Mat image;
