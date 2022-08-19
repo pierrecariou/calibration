@@ -17,14 +17,14 @@
 void	errorArguments(char *arg, const long &result, char *endptr)
 {
 	if ((errno == ERANGE && (result == LONG_MAX || result == LONG_MIN))
-            || (errno != 0 && result == 0)) {
-        perror("strtol");
-        exit(EXIT_FAILURE);
-    }
-    if (endptr == arg) {
-        std::cerr << "Aucun chiffre trouvé" << std::endl;
-    	exit(EXIT_FAILURE);
-    }
+			|| (errno != 0 && result == 0)) {
+		perror("strtol");
+		exit(EXIT_FAILURE);
+	}
+	if (endptr == arg) {
+		std::cerr << "Aucun chiffre trouvé" << std::endl;
+		exit(EXIT_FAILURE);
+	}
 }
 
 int	main(int argc, char** argv)
@@ -41,15 +41,15 @@ int	main(int argc, char** argv)
 	errno = 0;
 	long height = strtol(argv[2], &endptr, 10);
 	errorArguments(argv[2], height, endptr);
-	
-    cv::Mat image { cv::imread("resources/calibration.jpg", -1) };
-    cv::Mat rawImage { cv::imread("resources/calibration.jpg", -1) };
-    if (image.empty() || rawImage.empty()) {
-        std::cerr << "Could not read the image" << std::endl;
-        return (1);
-    }
+
+	cv::Mat image { cv::imread("resources/calibration.jpg", -1) };
+	cv::Mat rawImage { cv::imread("resources/calibration.jpg", -1) };
+	if (image.empty() || rawImage.empty()) {
+		std::cerr << "Could not read the image" << std::endl;
+		return (1);
+	}
 	cv::resize(image, image, cv::Size(width, height), cv::INTER_LINEAR);
 	cv::resize(rawImage, rawImage, cv::Size(width, height), cv::INTER_LINEAR);
 	Window win(image, rawImage, "Calibration");
-    return (0);
+	return (0);
 }

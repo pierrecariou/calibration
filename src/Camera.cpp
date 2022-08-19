@@ -29,9 +29,9 @@ Camera::~Camera()
 void	Camera::calibrate()
 {
 	cv::Mat cameraMatrix = (cv::Mat1d(3, 3)
-		<< fx, 0, cx, 0, fy, cy, 0, 0, 1);
+			<< fx, 0, cx, 0, fy, cy, 0, 0, 1);
 	cv::Mat distortionCoefficients = (cv::Mat1d(1, 8)
-		<< k1, k2, p1, p2, k3, k4, k5, k6);
+			<< k1, k2, p1, p2, k3, k4, k5, k6);
 
 	// creates rvec and tvec
 	cv::solvePnP(objectPoints,imagePoints, cameraMatrix, distortionCoefficients, rvec, tvec, false, cv::SOLVEPNP_P3P);
@@ -42,9 +42,9 @@ void	Camera::test(cv::Mat &image)
 	// reprojection from 3D points to 2D points
 	// call this function only for testing purpose
 	cv::Mat cameraMatrix = (cv::Mat1d(3, 3)
-		<< fx, 0, cx, 0, fy, cy, 0, 0, 1);
+			<< fx, 0, cx, 0, fy, cy, 0, 0, 1);
 	cv::Mat distortionCoefficients = (cv::Mat1d(1, 8)
-		<< k1, k2, p1, p2, k3, k4, k5, k6);
+			<< k1, k2, p1, p2, k3, k4, k5, k6);
 	std::vector<cv::Point2f> points;
 	cv::projectPoints(objectPoints, rvec, tvec, cameraMatrix, distortionCoefficients, points);
 	for (unsigned int i = 0; i < points.size(); ++i)

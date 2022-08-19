@@ -36,7 +36,7 @@ void	Window::initialize()
 	cv::namedWindow(name, 1);
 	cv::setMouseCallback(name, getUserInput, this);
 	cv::putText(image, "Please click on the 4 rectangle corners"
-		, cv::Point2f(10, image.rows - 10), 5, 1, CV_RGB(255, 255, 255), 2);
+			, cv::Point2f(10, image.rows - 10), 5, 1, CV_RGB(255, 255, 255), 2);
 
 	cv::imshow(name, image);
 	cv::waitKey(0);
